@@ -1,0 +1,56 @@
+Vehicle Maintenance App — High-Level Overview
+
+Purpose
+The Vehicle Maintenance App is a modern, responsive web application designed to help users efficiently manage their vehicles and track all related maintenance activities. It provides an intuitive interface for adding, viewing, and maintaining records for multiple vehicles, ensuring users stay on top of essential maintenance tasks and schedules.
+
+---
+
+Core Features & Functionality
+
+1. User Interface & Experience
+- Modern, Responsive Design: The app features a visually appealing, mobile-friendly layout with a dark/light theme toggle, sticky header, and consistent card-based UI components.
+- Navigation: A top navigation bar provides quick access to Home (Dashboard), Vehicles list, Add Vehicle, and Dashboard.
+- Theme Switching: Users can switch between dark and light modes, with their preference saved across sessions.
+
+2. Vehicle Management
+- Add Vehicle: Users can add new vehicles by specifying details such as license plate, make, model, and year.
+- View Vehicles: All vehicles are displayed in a stylish, sortable table with avatars and action buttons for viewing, editing, or deleting each vehicle.
+- Edit/Delete Vehicles: Existing vehicle records can be updated or removed, with confirmation prompts to prevent accidental deletion.
+
+3. Maintenance Logging
+- View Maintenance Log: Each vehicle has a dedicated log page showing all maintenance activities (date, odometer, cost, note).
+- Add Maintenance Entry: Users can log new maintenance events with relevant details via a user-friendly form.
+- Maintenance History: All entries are displayed in a clean, icon-enhanced table with zebra striping and responsive design.
+- Empty State Messaging: If no maintenance records exist, the app displays a clear, actionable message.
+
+4. Scheduled Maintenance
+- Schedule Maintenance: Users can add scheduled maintenance tasks (due date, odometer, note) for each vehicle.
+- Track Status: Scheduled tasks are listed with their status (Pending/Completed) and can be marked as complete directly from the interface.
+
+5. Dashboard & Analytics
+- Dashboard Overview: The home page provides a snapshot of total vehicles, total maintenance logs, and quick-action buttons.
+- Scheduled Maintenance Chart: A doughnut chart visualizes the proportion of vehicles with and without scheduled maintenance.
+- Recent Activity: The dashboard highlights the 5 most recent maintenance actions, showing vehicle, date, note, and cost.
+
+6. Backend & Data Storage
+- Flask Web Framework: The app is built using Flask, leveraging Jinja2 templating for dynamic HTML generation.
+- MongoDB Integration: Vehicle and maintenance records are stored in MongoDB, allowing for scalable and flexible data management.
+- RESTful Routing: All main operations (CRUD) for vehicles and maintenance are exposed via clean, RESTful endpoints.
+
+7. Version Control & Deployment
+- Git Integration: The project is tracked with Git and can be pushed/pulled from GitHub for collaboration and backup.
+- Easy Deployment: The app structure supports deployment to any standard Flask-compatible environment.
+
+---
+
+Optional/Planned Features
+- User Authentication: (Not yet implemented) Add login/registration so each user can manage their own vehicles and logs.
+- Role-Based Access: (Planned) Admin/user roles for multi-user management.
+- Notifications: (Planned) Reminders for upcoming scheduled maintenance.
+
+---
+
+Summary
+This app is your all-in-one solution for tracking vehicles and their maintenance, combining a beautiful, modern UI with robust backend functionality. It is designed for ease of use, scalability, and extensibility, suitable for individuals or small fleets.
+
+---
