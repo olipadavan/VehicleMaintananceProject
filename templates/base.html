@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}VehicleMaintananceApp{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-left">
+            <span class="app-title">Vehicle Maintenance</span>
+        </div>
+        <nav class="main-nav" id="mainNav">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/vehicles" class="nav-link">Vehicles</a>
+            <a href="/vehicles/add" class="nav-link">Add Vehicle</a>
+            <a href="/" class="nav-link">Dashboard</a>
+        </nav>
+        <div class="header-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                <span id="themeIcon">🌙</span>
+            </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+        </div>
+    </header>
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
+</body>
+</html>

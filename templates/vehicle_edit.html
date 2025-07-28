@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}Edit Vehicle | VehicleMaintananceApp{% endblock %}
+{% block body %}
+    <style>
+        body {
+            background: #181c20;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #fff;
+        }
+        form {
+            background: #23272b;
+            padding: 32px;
+            border-radius: 12px;
+            max-width: 420px;
+            margin: 40px auto;
+            box-shadow: 0 2px 16px #0005;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            background: #23272b;
+            color: #e0e0e0;
+        }
+        button {
+            margin-top: 18px;
+            padding: 10px 20px;
+            background: #2e6c80;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #20506b;
+        }
+        a {
+            color: #9fd6ff;
+        }
+    </style>
+    <style>
+    .glass-card {
+        background: rgba(40, 44, 52, 0.85);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 40px 48px;
+        max-width: 500px;
+        margin: 60px auto;
+    }
+    .back-btn {
+        color: #fff;
+        background: linear-gradient(90deg, #2e6c80 0%, #4e8cff 100%);
+        text-decoration: none;
+        border-radius: 24px;
+        padding: 12px 28px;
+        font-size: 18px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 2px 8px #0005;
+        border: none;
+        transition: background 0.2s, box-shadow 0.2s;
+        margin: 24px 0 0 0;
+    }
+    .back-btn::before {
+        content: '\2190';
+        font-size: 20px;
+        margin-right: 8px;
+    }
+    .back-btn:hover {
+        background: linear-gradient(90deg, #20506b 0%, #3579c9 100%);
+        box-shadow: 0 4px 16px #0007;
+    }
+    </style>
+</head>
+<body>
+    <div class="card">
+
+    <h1>Edit Vehicle</h1>
+    <form method="post">
+        <label for="license_plate">License Plate:</label>
+        <input type="text" id="license_plate" name="license_plate" value="{{ vehicle.license_plate }}" required><br>
+        <label for="make">Make:</label>
+        <input type="text" id="make" name="make" value="{{ vehicle.make }}" required><br>
+        <label for="model">Model:</label>
+        <input type="text" id="model" name="model" value="{{ vehicle.model }}" required><br>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" value="{{ vehicle.year }}" min="1886" max="2100" required><br>
+        <button type="submit">Save Changes</button>
+    </form>
+    <a class="back-btn" href="/vehicles">Back to Vehicles</a>
+    </div>
+{% endblock %}

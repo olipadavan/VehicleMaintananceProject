@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Vehicles | VehicleMaintananceApp{% endblock %}
+{% block body %}
+<div class="card">
+    <div>
+        <h1 style="margin: 0;">Vehicles</h1>
+        <a class="button" href="/vehicles/add"><span style="font-size:1.3em;">➕</span> Add Vehicle</a>
+    </div>
+    <div>
+    <table class="pretty-table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>License Plate</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for v in vehicles %}
+        <tr>
+            <td>
+                <span style="display:inline-block; background:var(--color-accent); color:#fff; border-radius:50%; width:32px; height:32px; line-height:32px; font-weight:bold; font-size:1.1em;">{{ v.make[0]|upper }}</span>
+            </td>
+            <td><strong>{{ v.license_plate }}</strong></td>
+            <td>{{ v.make }}</td>
+            <td>{{ v.model }}</td>
+            <td>{{ v.year }}</td>
+            <td>
+                <a class="button" title="View" href="/vehicles/{{ v.id }}">🔍</a>
+                <a class="button" title="Edit" href="/vehicles/{{ v.id }}/edit">✏️</a>
+                <form action="/vehicles/{{ v.id }}/delete" method="post">
+                    <button type="submit" class="delete-btn" title="Delete" style="padding:6px 14px; font-size:0.98em;" onclick="return confirm('Delete this vehicle?');">🗑️</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">No vehicles found. <a href="/vehicles/add" style="color:var(--color-link); text-decoration:underline;">Add your first vehicle</a>!</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <a class="back-btn" href="/">← Back to Home</a>
+</div>
+
+
+{% endblock %}

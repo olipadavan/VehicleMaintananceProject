@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Home | VehicleMaintananceApp{% endblock %}
+{% block body %}
+<div class="dashboard-container">
+    <h1>Vehicle Maintenance Dashboard</h1>
+    <div class="dashboard-cards">
+        <div class="dashboard-card">
+            <h2>Total Vehicles</h2>
+            <div class="dashboard-count">{{ total_vehicles }}</div>
+        </div>
+        <div class="dashboard-card">
+            <h2>Total Maintenance Logs</h2>
+            <div class="dashboard-count">{{ total_logs }}</div>
+        </div>
+    </div>
+    <div class="dashboard-actions">
+        <a class="dashboard-btn" href="/vehicles">View All Vehicles</a>
+        <a class="dashboard-btn" href="/vehicles/add">Add New Vehicle</a>
+    </div>
+    <div>
+        <canvas id="schedChart" width="400" height="200"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="dashboard-card">
+        <h2>Recent Maintenance Activity</h2>
+        {% if recent_maintenance and recent_maintenance|length > 0 %}
+        <div>
+        <table class="pretty-table">
+            <thead>
+                <tr>
+                    <th>Vehicle</th>
+                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in recent_maintenance %}
+                <tr>
+                    <td><span>{{ log.vehicle_make }} {{ log.vehicle_model }}</span></td>
+                    <td>{{ log.date }}</td>
+                    <td>{{ log.note or '-' }}</td>
+                    <td>{{ log.cost }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        {% else %}
+        <div>No recent maintenance activity.</div>
+        {% endif %}
+    </div>
+    <script>
+        const ctx = document.getElementById('schedChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['With Scheduled Maintenance', 'Without Scheduled Maintenance'],
+                datasets: [{
+                    data: [{{ vehicles_with_sched }}, {{ vehicles_without_sched }}],
+                    backgroundColor: [
+                        'rgba(78, 170, 255, 0.8)',
+                        'rgba(64, 64, 64, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(78, 170, 255, 1)',
+                        'rgba(64, 64, 64, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#e0e0e0',
+                            font: { size: 16 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+{% endblock %}

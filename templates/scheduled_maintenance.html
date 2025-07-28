@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Schedule Maintenance | VehicleMaintananceApp{% endblock %}
+{% block body %}
+<div class="card">
+    <h1>Schedule Maintenance for {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.license_plate }})</h1>
+    <form method="post">
+        <label for="due_odo">Due Odometer (km):</label>
+        <input type="number" id="due_odo" name="due_odo" min="0" placeholder="e.g. 120000">
+        <label for="due_date">Due Date:</label>
+        <input type="date" id="due_date" name="due_date">
+        <label for="note">Note:</label>
+        <input type="text" id="note" name="note" maxlength="256" placeholder="e.g. Timing belt replacement">
+        <button type="submit">Schedule</button>
+    </form>
+    <a class="back-btn" href="/vehicles/{{ vehicle.id }}">Back to Vehicle</a>
+    <h2>Existing Scheduled Maintenance</h2>
+    {% if scheduled and scheduled|length > 0 %}
+    <table>
+        <tr><th>Due Odo</th><th>Due Date</th><th>Note</th><th>Status</th></tr>
+        {% for sched in scheduled %}
+        <tr>
+            <td>{{ sched.due_odo or '-' }}</td>
+            <td>{{ sched.due_date or '-' }}</td>
+            <td>{{ sched.note or '-' }}</td>
+            <td>{% if sched.completed %}Completed{% else %}Pending{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No scheduled maintenance.</p>
+    {% endif %}
+</div>
+{% endblock %}

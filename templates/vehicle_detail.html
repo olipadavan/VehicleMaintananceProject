@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Vehicle Details | VehicleMaintananceApp{% endblock %}
+{% block body %}
+
+<div class="card">
+
+    <h1>Vehicle Details</h1>
+    <table>
+        <tr><th>License Plate</th><td>{{ vehicle.license_plate }}</td></tr>
+        <tr><th>Make</th><td>{{ vehicle.make }}</td></tr>
+        <tr><th>Model</th><td>{{ vehicle.model }}</td></tr>
+        <tr><th>Year</th><td>{{ vehicle.year }}</td></tr>
+    </table>
+    <h2>Maintenance Log</h2>
+    <a class="button" href="/vehicles/{{ vehicle.id }}/maintenance-log">View & Add Maintenance Entries</a>
+    <h2>Scheduled Maintenance</h2>
+    <a class="button" href="/vehicles/{{ vehicle.id }}/scheduled">Schedule Maintenance</a>
+    {% if scheduled and scheduled|length > 0 %}
+    <table>
+        <tr><th>Due Odo</th><th>Due Date</th><th>Note</th><th>Status</th><th>Actions</th></tr>
+        {% for sched in scheduled %}
+        <tr>
+            <td>{{ sched.due_odo or '-' }}</td>
+            <td>{{ sched.due_date or '-' }}</td>
+            <td>{{ sched.note or '-' }}</td>
+            <td>{% if sched.completed %}Completed{% else %}Pending{% endif %}</td>
+            <td>
+                {% if not sched.completed %}
+                <form method="post" action="/scheduled/{{ sched.id }}/complete" style="display:inline;">
+                    <button type="submit">Mark Complete</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No scheduled maintenance.</p>
+    {% endif %}
+    <a class="back-btn" href="/vehicles">Back to Vehicles</a>
+    </div>
+{% endblock %}
